@@ -5,6 +5,8 @@ import csv
 from random import randint, choice
 from datetime import datetime, timedelta
 
+import uuid
+
 def random_datetime(begin, end):
     delta = end-begin
     random_seconds = randint(1, int(delta.total_seconds()))
@@ -22,7 +24,8 @@ def main():
         med_csv = csv.reader(med_file)
 
         for line in med_csv:
-            # generalize id???
+            # randomize id
+            rand_id = str(uuid.uuid4())
             
             # generalize age
             age = int(line[2])
@@ -36,21 +39,24 @@ def main():
             post_code_supped[-supp_range:] = ["*"]*supp_range
             post_code_supped = ''.join(post_code_supped)
 
-            row = MED_TABLE.insert().values(id=line[0], age=age_range,
-                gender=line[5], postal_code=post_code_supped, diagnosis=line[7])
+            row = MED_TABLE.insert().values(id=rand_id, 
+                                            age=age_range,
+                                            gender=line[5], 
+                                            postal_code=post_code_supped, 
+                                            diagnosis=line[7])
             CONN.execute(row)
         CONN.commit()
 
 
-    # with open("./Data/work.csv", 'r') as work_file:
-    #     work_csv = csv.reader(work_file)
+    with open("./Data/work.csv", 'r') as work_file:
+        work_csv = csv.reader(work_file)
 
-    #     for line in work_csv:
-    #         row = WORK_TABLE.insert().values(id=line[0], f_name=line[1],
-    #             l_name=line[2], postal_code=line[3], gender=line[4],
-    #             education=line[5], workplace=line[6], department=line[7])
-    #         CONN.execute(row)
-    #     CONN.commit()
+        for line in work_csv:
+            row = WORK_TABLE.insert().values(id=line[0], f_name=line[1],
+                l_name=line[2], postal_code=line[3], gender=line[4],
+                education=line[5], workplace=line[6], department=line[7])
+            CONN.execute(row)
+        CONN.commit()
 
 if __name__ == '__main__':
     main()
