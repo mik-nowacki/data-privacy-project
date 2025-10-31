@@ -22,22 +22,35 @@ def main():
         med_csv = csv.reader(med_file)
 
         for line in med_csv:
-            row = MED_TABLE.insert().values(id=line[0], name=line[1], age=line[2],
-                address=line[3], email=line[4], gender=line[5], postal_code=line[6],
-                diagnosis=line[7])
+            # generalize id???
+            
+            # generalize age
+            age = int(line[2])
+            range_low = int(age/5) * 5
+            range_high = 4 + range_low
+            age_range = f'{range_low} - {range_high}'
+
+            # suppress postal code by "*"
+            supp_range = 2
+            post_code_supped = list(line[6])
+            post_code_supped[-supp_range:] = ["*"]*supp_range
+            post_code_supped = ''.join(post_code_supped)
+
+            row = MED_TABLE.insert().values(id=line[0], age=age_range,
+                gender=line[5], postal_code=post_code_supped, diagnosis=line[7])
             CONN.execute(row)
         CONN.commit()
 
 
-    with open("./Data/work.csv", 'r') as work_file:
-        work_csv = csv.reader(work_file)
+    # with open("./Data/work.csv", 'r') as work_file:
+    #     work_csv = csv.reader(work_file)
 
-        for line in work_csv:
-            row = WORK_TABLE.insert().values(id=line[0], f_name=line[1],
-                l_name=line[2], postal_code=line[3], gender=line[4],
-                education=line[5], workplace=line[6], department=line[7])
-            CONN.execute(row)
-        CONN.commit()
+    #     for line in work_csv:
+    #         row = WORK_TABLE.insert().values(id=line[0], f_name=line[1],
+    #             l_name=line[2], postal_code=line[3], gender=line[4],
+    #             education=line[5], workplace=line[6], department=line[7])
+    #         CONN.execute(row)
+    #     CONN.commit()
 
 if __name__ == '__main__':
     main()
