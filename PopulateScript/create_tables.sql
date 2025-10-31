@@ -1,9 +1,6 @@
 CREATE TABLE med_data (
-    id SERIAL PRIMARY KEY,
-    -- name VARCHAR(50),
+    id int PRIMARY KEY,
     age varchar(20),
-    -- address VARCHAR(100),
-    -- email VARCHAR(50),
     gender VARCHAR(20),
     postal_code VARCHAR(20),
     diagnosis VARCHAR(20)
