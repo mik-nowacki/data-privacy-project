@@ -5,8 +5,6 @@ import csv
 from random import randint, choice
 from datetime import datetime, timedelta
 
-import uuid
-
 def random_datetime(begin, end):
     delta = end-begin
     random_seconds = randint(1, int(delta.total_seconds()))
@@ -24,26 +22,9 @@ def main():
         med_csv = csv.reader(med_file)
 
         for line in med_csv:
-            # randomize id
-            rand_id = str(uuid.uuid4())
-            
-            # generalize age
-            age = int(line[2])
-            range_low = int(age/5) * 5
-            range_high = 4 + range_low
-            age_range = f'{range_low} - {range_high}'
-
-            # suppress postal code by "*"
-            supp_range = 2
-            post_code_supped = list(line[6])
-            post_code_supped[-supp_range:] = ["*"]*supp_range
-            post_code_supped = ''.join(post_code_supped)
-
-            row = MED_TABLE.insert().values(id=rand_id, 
-                                            age=age_range,
-                                            gender=line[5], 
-                                            postal_code=post_code_supped, 
-                                            diagnosis=line[7])
+            row = MED_TABLE.insert().values(id=line[0], name=line[1], age=line[2],
+                address=line[3], email=line[4], gender=line[5], postal_code=line[6],
+                diagnosis=line[7])
             CONN.execute(row)
         CONN.commit()
 

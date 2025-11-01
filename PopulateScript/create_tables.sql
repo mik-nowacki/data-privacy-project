@@ -1,31 +1,29 @@
-CREATE TABLE med_data (
-    id TEXT PRIMARY KEY,
-    age VARCHAR(20),
-    gender VARCHAR(20),
-    postal_code VARCHAR(20),
-    diagnosis VARCHAR(20)
+CREATE TABLE MED_DATA_DEIDENTIFIED (
+    ID TEXT PRIMARY KEY,
+    AGE VARCHAR(20),
+    GENDER VARCHAR(20),
+    POSTAL_CODE VARCHAR(20),
+    DIAGNOSIS VARCHAR(20)
 );
 
-CREATE TABLE work_data (
-    id SERIAL PRIMARY KEY,
-    f_name VARCHAR(50),
-    l_name VARCHAR(50),
-    postal_code VARCHAR(20),
-    gender VARCHAR(20),
-    education VARCHAR(100),
-    workplace VARCHAR(100),
-    department VARCHAR(50)
+CREATE TABLE WORK_DATA (
+    ID SERIAL PRIMARY KEY,
+    F_NAME VARCHAR(50),
+    L_NAME VARCHAR(50),
+    POSTAL_CODE VARCHAR(20),
+    GENDER VARCHAR(20),
+    EDUCATION VARCHAR(100),
+    WORKPLACE VARCHAR(100),
+    DEPARTMENT VARCHAR(50)
 );
 
-CREATE TABLE med_data_og (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50),
-    age INTEGER,
-    address VARCHAR(100),
-    email VARCHAR(50),
-    gender VARCHAR(20),
-    postal_code VARCHAR(20),
-    diagnosis VARCHAR(20)
-    
+CREATE TABLE MED_DATA (
+    ID SERIAL PRIMARY KEY,
+    NAME VARCHAR(50),
+    AGE INTEGER,
+    ADDRESS VARCHAR(100),
+    EMAIL VARCHAR(50),
+    GENDER VARCHAR(20),
+    POSTAL_CODE VARCHAR(20),
+    DIAGNOSIS VARCHAR(20)
 );
-
