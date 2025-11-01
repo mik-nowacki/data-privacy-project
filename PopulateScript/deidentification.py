@@ -32,7 +32,7 @@ def main():
         age_range = f'{range_low} - {range_high}'
 
         # suppress postal code by "*"
-        supp_range = 2
+        supp_range = 3
         post_code_supped = list(line["postal_code"])
         post_code_supped[-supp_range:] = ["*"]*supp_range
         post_code_supped = ''.join(post_code_supped)
