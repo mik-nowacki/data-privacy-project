@@ -32,8 +32,8 @@ public class WorkDataController {
     }
 
     @PostMapping("/count")
-    public CountResponse getWorkDataCount(@RequestBody CountRequest countRequest ) {
-        // TODO: Implement 
+    public CountResponse getWorkDataCount(@RequestBody CountRequest countRequest) {
+        // TODO: Implement
         return new CountResponse(countRequest.getAttribute(), 0);
     }
 }

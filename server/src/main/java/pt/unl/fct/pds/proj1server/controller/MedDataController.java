@@ -1,9 +1,13 @@
 package pt.unl.fct.pds.proj1server.controller;
 
 import pt.unl.fct.pds.proj1server.model.MedData;
+import pt.unl.fct.pds.proj1server.model.MedDataDeidentified;
+import pt.unl.fct.pds.proj1server.model.MedDataKAnonymous;
 import pt.unl.fct.pds.proj1server.model.CountRequest;
 import pt.unl.fct.pds.proj1server.model.CountResponse;
 import pt.unl.fct.pds.proj1server.repository.MedDataRepository;
+import pt.unl.fct.pds.proj1server.repository.MedDataDeidentifiedRepository;
+import pt.unl.fct.pds.proj1server.repository.MedDataKAnonymousRepository;
 import pt.unl.fct.pds.proj1server.model.CountRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,4 +41,19 @@ public class MedDataController {
         return new CountResponse(countRequest.getAttribute(), 0);
     }
 
+    @Autowired
+    private MedDataDeidentifiedRepository medDataDeidentifiedRepository;
+
+    @GetMapping("/deidentified")
+    public List<MedDataDeidentified> getAllMedDatasDeidentified() {
+        return medDataDeidentifiedRepository.findAll();
+    }
+
+    @Autowired
+    private MedDataKAnonymousRepository medDataKAnonymousRepository;
+
+    @GetMapping("/k_anonymous")
+    public List<MedDataKAnonymous> getAllMedDatasKAnonymous() {
+        return medDataKAnonymousRepository.findAll();
+    }
 }
