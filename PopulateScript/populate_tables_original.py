@@ -11,7 +11,7 @@ def random_datetime(begin, end):
     return begin+timedelta(seconds=random_seconds)
 
 def main():
-    engine = create_engine("postgresql://postgres:password@localhost:5432/pds_proj_1")
+    engine = create_engine("postgresql://postgresql:password@localhost:5432/pds_proj_1")
     CONN = engine.connect()
     META_DATA = MetaData()
     META_DATA.reflect(bind=engine)
