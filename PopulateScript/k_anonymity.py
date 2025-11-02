@@ -99,7 +99,7 @@ def common_prefix(strings):
 
 
 def main():
-    engine = create_engine("postgresql://postgres:password@localhost:5432/pds_proj_1")
+    engine = create_engine("postgresql://postgresql:password@localhost:5432/pds_proj_1")
     CONN = engine.connect()
     META = MetaData()
     META.reflect(bind=engine)
