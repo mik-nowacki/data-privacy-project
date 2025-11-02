@@ -99,16 +99,16 @@ def common_prefix(strings):
 
 
 def main():
-    engine = create_engine("postgresql://postgresql:password@localhost:5432/pds_proj_1")
+    engine = create_engine("postgresql://postgres:password@localhost:5432/pds_proj_1")
     CONN = engine.connect()
     META = MetaData()
     META.reflect(bind=engine)
 
     MED_TABLE = META.tables["med_data"]
 
-    if "med_data_kanon" not in META.tables:
+    if "med_data_k_anonymous" not in META.tables:
         MED_DATA_KANON = Table(
-            "med_data_kanon", META,
+            "med_data_k_anonymous", META,
             Column("id", String, primary_key=True),
             Column("age", String),
             Column("gender", String),
@@ -117,7 +117,7 @@ def main():
         )
         META.create_all(engine)
     else:
-        MED_DATA_KANON = META.tables["med_data_kanon"]
+        MED_DATA_KANON = META.tables["med_data_k_anonymous"]
         
     data = load_data(CONN, MED_TABLE)
 
@@ -125,6 +125,8 @@ def main():
     generalized_data = []
     for group in partitions:
         generalized_data += generalize_group(group)
+
+    CONN.execute(MED_DATA_KANON.delete())  # clears table
 
     for row in generalized_data:
         rand_id = str(uuid.uuid4())
