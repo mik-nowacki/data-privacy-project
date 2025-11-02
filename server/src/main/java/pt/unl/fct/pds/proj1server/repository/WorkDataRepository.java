@@ -6,5 +6,14 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WorkDataRepository extends JpaRepository<WorkData, Long> {
-    // Custom query methods can be defined here
+
+    long countByPostalCode(String postalCode);
+
+    long countByGender(String gender);
+
+    long countByEducation(String education);
+
+    long countByWorkplace(String workplace);
+
+    long countByDepartment(String department);
 }
